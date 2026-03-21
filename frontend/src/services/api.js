@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const api = axios.create({
- baseURL: 'http://127.0.0.1:8000',
+  baseURL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://127.0.0.1:8000'
+    : 'https://alumai-backend.onrender.com',
   timeout: 30000,
 });
 
