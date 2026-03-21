@@ -352,7 +352,7 @@ export default function Login({ onLogin }) {
 
           {/* Hint */}
           <p className="text-center mt-8 font-mono text-[10px]" style={{ color: 'rgba(255,255,255,0.12)' }}>
-            Default: admin / alumai2025
+            Default: admin / Sai
           </p>
         </motion.div>
       </div>
