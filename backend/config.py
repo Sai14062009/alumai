@@ -58,7 +58,9 @@ class Settings(BaseSettings):
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "http://localhost:3000",
-        "https://*.vercel.app",
+        "https://alumai.vercel.app",
+        "https://alumai-git-main-sai14062009s-projects.vercel.app",
+        "https://alumai-hwyf259cr-sai14062009s-projects.vercel.app",
     ]
 
     class Config:
