@@ -3,7 +3,7 @@ import axios from 'axios';
 const api = axios.create({
   baseURL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:8000'
-    : 'https://alumai-backend.onrender.com',
+    : 'https://alumai-backend-ra3y.onrender.com',
   timeout: 30000,
 });
 
