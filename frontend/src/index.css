@@ -4,6 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══ GLOBAL OVERFLOW FIX ═══ */
+html, body, #root {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 /* ═══════════════════════════════════════════
    DARK MODE
    ═══════════════════════════════════════════ */
@@ -69,6 +80,7 @@ body {
   font-family: 'Outfit', system-ui, sans-serif;
   transition: background-color 0.5s ease, color 0.5s ease;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* ─── GLASS ─── */
@@ -141,6 +153,10 @@ body {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(30px, -20px) scale(1.05); }
   66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 /* ─── NOISE TEXTURE ─── */
