@@ -6,9 +6,10 @@
 
 /* ═══ GLOBAL OVERFLOW FIX ═══ */
 html, body, #root {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   max-width: 100vw;
   width: 100%;
+  position: relative;
 }
 
 *, *::before, *::after {
@@ -80,7 +81,7 @@ body {
   font-family: 'Outfit', system-ui, sans-serif;
   transition: background-color 0.5s ease, color 0.5s ease;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 
 /* ─── GLASS ─── */
@@ -115,12 +116,8 @@ body {
 }
 
 /* ─── GLOW RING ─── */
-.glow-ring {
-  box-shadow: var(--shadow-glow-accent);
-}
-.glow-ring-strong {
-  box-shadow: 0 0 40px rgba(0,229,155,0.2), 0 0 100px rgba(0,229,155,0.06);
-}
+.glow-ring { box-shadow: var(--shadow-glow-accent); }
+.glow-ring-strong { box-shadow: 0 0 40px rgba(0,229,155,0.2), 0 0 100px rgba(0,229,155,0.06); }
 
 /* ─── HAPTIC ─── */
 .haptic { transition: transform 0.1s ease; }
@@ -128,10 +125,12 @@ body {
 
 /* ─── MESH GRADIENT ORBS ─── */
 .orb {
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   filter: blur(100px);
   pointer-events: none;
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 /* ─── SCROLLBAR ─── */
@@ -141,23 +140,10 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ─── KEYFRAMES ─── */
-@keyframes blink-cell {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.25; }
-}
-@keyframes typing-dot {
-  0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-6px); }
-}
-@keyframes meshMove {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
-}
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
+@keyframes blink-cell { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+@keyframes typing-dot { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+@keyframes meshMove { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -20px) scale(1.05); } 66% { transform: translate(-20px, 15px) scale(0.95); } }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
 /* ─── NOISE TEXTURE ─── */
 .noise::after {
@@ -171,9 +157,7 @@ body {
 }
 
 /* ─── GRADIENT BORDER CARDS ─── */
-.gradient-border {
-  position: relative;
-}
+.gradient-border { position: relative; }
 .gradient-border::before {
   content: '';
   position: absolute;
