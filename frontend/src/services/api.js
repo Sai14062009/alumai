@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:8000'
     : 'https://alumai-backend-ra3y.onrender.com',
-  timeout: 30000,
+  timeout: 120000,
 });
 
 // Attach JWT token to every request
@@ -157,6 +157,22 @@ export const uploadAssets = async (file) => {
   return response.data;
 };
 
+// ─── ASSET KPIs ─────────────────────────────────────────
+export const uploadKPIData = async (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const response = await api.post('/assets/kpi/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return response.data;
+};
+
+export const getAllKPIs = async () => {
+  const response = await api.get('/assets/kpi/all');
+  return response.data;
+};
+
+// ─── HEALTH ─────────────────────────────────────────────
 export const healthCheck = async () => {
   const response = await api.get('/health');
   return response.data;

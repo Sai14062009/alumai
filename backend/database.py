@@ -38,5 +38,30 @@ class TicketModel(Base):
     confidence_score = Column(Float, nullable=True)
     chat_history = Column(JSON, default=list)
 
+class AssetKPIModel(Base):
+    __tablename__ = "asset_kpis"
+    id = Column(Integer, primary_key=True, index=True)
+    asset_name = Column(String, index=True)
+    asset_type = Column(String, nullable=True)
+    complex = Column(String, nullable=True)
+    code = Column(String, nullable=True)
+    status = Column(String, nullable=True)
+    bath_temp = Column(Float, nullable=True)
+    flue_temp = Column(Float, nullable=True)
+    charge_weight = Column(Float, nullable=True)
+    charge_no = Column(Integer, nullable=True)
+    sample_grade = Column(String, nullable=True)
+    cycle_time = Column(Float, nullable=True)
+    std_cycle_time = Column(Float, nullable=True)
+    cycle_step = Column(Integer, nullable=True)
+    taps_taken = Column(Integer, nullable=True)
+    last_tap = Column(String, nullable=True)
+    cast_no = Column(String, nullable=True)
+    cast_alloy = Column(String, nullable=True)
+    cast_speed = Column(Float, nullable=True)
+    cast_length = Column(Float, nullable=True)
+    time_remaining = Column(Float, nullable=True)
+    bct = Column(Float, nullable=True)
+
 def init_db():
     Base.metadata.create_all(bind=engine)

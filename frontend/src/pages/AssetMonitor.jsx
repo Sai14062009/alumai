@@ -223,27 +223,36 @@ export default function AssetMonitor() {
             ))}
           </div>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          {PLANT_SECTIONS.map((section) => (
-            <div key={section.id}>
-              <p className="font-mono text-[7px] sm:text-[9px] font-semibold uppercase tracking-[0.1em] mb-2 text-center" style={{ color: 'var(--text-muted)' }}>{section.title}</p>
-              <div className="flex flex-wrap gap-[3px] sm:gap-[5px] justify-center">
-                {section.groups.flatMap(g => g.assets).map((asset) => {
-                  const s = statusMap[asset]?.status || 'online';
-                  const isFault = s === 'fault';
-                  const isPending = s === 'pending';
-                  const colors = { online: '#00E59B', fault: '#FF4D6A', pending: '#FFB800' };
-                  return (
-                    <div key={asset} onClick={() => setSelectedAsset(selectedAsset === asset ? null : asset)}
-                      className={`w-[10px] h-[10px] sm:w-[13px] sm:h-[13px] rounded-full cursor-pointer ${isFault ? 'animate-[dotPulse_2s_ease-in-out_infinite]' : ''}`}
-                      style={{ background: colors[s] || colors.online, boxShadow: isFault ? '0 0 6px rgba(255,77,106,0.5)' : isPending ? '0 0 4px rgba(255,184,0,0.3)' : 'none' }}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+  {PLANT_SECTIONS.map((section) => {
+    const allAssets = section.groups.flatMap(g => g.assets);
+    const cols = allAssets.length > 12 ? 6 : allAssets.length > 8 ? 5 : allAssets.length > 5 ? 4 : 3;
+    return (
+      <div key={section.id}>
+        <p className="font-mono text-[7px] sm:text-[9px] font-semibold uppercase tracking-[0.1em] mb-2 text-center" style={{ color: 'var(--text-muted)' }}>{section.title}</p>
+        <div className="overflow-hidden" style={{ border: '1.5px solid rgba(136,146,176,0.25)', borderRadius: '10px' }}>
+          <div className="grid" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
+            {allAssets.map((asset) => {
+              const s = statusMap[asset]?.status || 'online';
+              const isFault = s === 'fault';
+              const isPending = s === 'pending';
+              const colors = { online: '#00E59B', fault: '#FF4D6A', pending: '#FFB800' };
+              return (
+                <div key={asset} onClick={() => setSelectedAsset(selectedAsset === asset ? null : asset)}
+                  className="flex items-center justify-center cursor-pointer transition-colors hover:bg-[var(--bg-surface)]"
+                  style={{ padding: '6px', borderRight: '0.5px solid rgba(136,146,176,0.15)', borderBottom: '0.5px solid rgba(136,146,176,0.15)' }}
+                  title={`${asset} — ${s}`}>
+                  <div className={`w-[10px] h-[10px] sm:w-[11px] sm:h-[11px] rounded-full ${isFault ? 'animate-[dotPulse_2s_ease-in-out_infinite]' : ''}`}
+                    style={{ background: colors[s] || colors.online, boxShadow: isFault ? '0 0 6px rgba(255,77,106,0.5)' : isPending ? '0 0 4px rgba(255,184,0,0.3)' : '0 0 3px rgba(0,229,155,0.2)' }} />
+                </div>
+              );
+            })}
+          </div>
         </div>
+      </div>
+    );
+  })}
+</div>
       </motion.div>
 
       {/* Main area — Plant sections + side detail panel */}
